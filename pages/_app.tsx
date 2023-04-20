@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { Quattrocento_Sans } from "next/font/google";
+import Head from "next/head";
 
 const quatroSans = Quattrocento_Sans({
   weight: ["400", "700"],
@@ -10,8 +11,13 @@ const quatroSans = Quattrocento_Sans({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <main className={quatroSans.className}>
-      <Component {...pageProps} />
-    </main>
+    <>
+      <Head>
+        <title>A.R.I.A. - AI Assistant</title>
+      </Head>
+      <main className={quatroSans.className}>
+        <Component {...pageProps} />
+      </main>
+    </>
   );
 }
