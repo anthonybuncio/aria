@@ -14,11 +14,11 @@ export default function Home() {
   // Audio states
   const [audio, setAudio] = useState(null);
 
-  useEffect(() => {
-    if (!audio) {
-      setAudio("llbtsp.mp3");
-    }
-  }, [audio]);
+  // useEffect(() => {
+  //   if (!audio) {
+  //     setAudio("llbtsp.mp3");
+  //   }
+  // }, [audio]);
 
   const toggleRecord = () => {
     console.log("Ask permissions. Or start/stop record. Then send to Whisper");
@@ -29,6 +29,10 @@ export default function Home() {
     console.log(
       "Show once speech is transcribed after recording. Send text transcription to openai"
     );
+
+    if (!audio) {
+      setAudio("llbtsp.mp3");
+    }
 
     // try {
     //   const response = await fetch("api/audio", {
@@ -58,30 +62,31 @@ export default function Home() {
         <Loader />
         <Scroller />
       </div>
-      <div className="flex flex-col justify-between items-center w-full h-1/4 cursor-pointer">
+      <div className="flex flex-col justify-end items-center w-full h-1/4">
         <span
           onClick={() => {
             toggleRecord();
           }}
-          className="uppercase font-bold tracking-widest text-xl bg-gradient-to-bl from-rose-100 to-teal-100 text-transparent bg-clip-text"
+          className="p-4 uppercase font-bold tracking-widest text-xl cursor-pointer bg-gradient-to-bl from-rose-100 to-teal-100 text-transparent bg-clip-text"
         >
           Talk
         </span>
         {recordLoading && (
           <div className="w-6 h-6 rounded-full animate-spin border-y border-solid border-gray-100 border-t-transparent shadow-md"></div>
         )}
-        <button
-          onClick={generateTTS}
-          className="p-4 uppercase font-bold tracking-widest text-xl bg-gradient-to-bl from-rose-100 to-teal-100 text-transparent bg-clip-text"
-        >
-          Send message
-        </button>
-        <div className="text-xs text-center">
-          <span>Current audio: {audio}</span>
+
+        <div className="flex flex-col">
+          <button
+            onClick={generateTTS}
+            className="p-4 uppercase font-bold tracking-widest text-xl cursor-pointer bg-gradient-to-bl from-rose-100 to-teal-100 text-transparent bg-clip-text"
+          >
+            Send message
+          </button>
+          <span className="text-xs text-center">Current audio: {audio}</span>
           {audio && (
             <audio
-              // autoPlay
-              controls
+              autoPlay
+              // controls
               src={`audio/${audio}`}
               // className="hidden"
             />
