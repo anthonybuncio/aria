@@ -64,9 +64,7 @@ export default function Home() {
       </div>
       <div className="flex flex-col justify-end items-center w-full h-1/4">
         <span
-          onClick={() => {
-            toggleRecord();
-          }}
+          onClick={toggleRecord}
           className="p-4 uppercase font-bold tracking-widest text-xl cursor-pointer bg-gradient-to-bl from-rose-100 to-teal-100 text-transparent bg-clip-text"
         >
           Talk
@@ -75,23 +73,23 @@ export default function Home() {
           <div className="w-6 h-6 rounded-full animate-spin border-y border-solid border-gray-100 border-t-transparent shadow-md"></div>
         )}
 
-        <div className="flex flex-col">
-          <button
-            onClick={generateTTS}
-            className="p-4 uppercase font-bold tracking-widest text-xl cursor-pointer bg-gradient-to-bl from-rose-100 to-teal-100 text-transparent bg-clip-text"
-          >
-            Send message
-          </button>
-          <span className="text-xs text-center">Current audio: {audio}</span>
-          {audio && (
-            <audio
-              autoPlay
-              // controls
-              src={`audio/${audio}`}
-              // className="hidden"
-            />
-          )}
-        </div>
+        <button
+          onClick={generateTTS}
+          className="p-4 uppercase font-bold tracking-widest text-xl cursor-pointer bg-gradient-to-bl from-rose-100 to-teal-100 text-transparent bg-clip-text"
+        >
+          Send message
+        </button>
+        <span className="text-xs text-center p-4 uppercase font-bold">
+          Response received: {audio}
+        </span>
+        {audio && (
+          <audio
+            autoPlay
+            // controls
+            src={`audio/${audio}`}
+            // className="hidden"
+          />
+        )}
       </div>
     </div>
   );
